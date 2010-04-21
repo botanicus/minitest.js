@@ -4,7 +4,7 @@ Simple test framework for asynchronous testing in [Node.js](http://nodejs.org/).
 
 This is how the output looks like:
 
-![Minitest.js output](minitest.png)
+![Minitest.js output](http://github.com/botanicus/minitest.js/raw/master/minitest.png)
 
 # Setup
 
