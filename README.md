@@ -52,7 +52,7 @@ All this methods are supposed to return a string and all these methods have acce
 
 # Common Problems in Testing Asynchronous Code
 
-## Exceptions
+## Exceptions in Callbacks
 
 Obviously you can't catch errors which occured in callbacks. Consider following:
 
@@ -63,3 +63,34 @@ Obviously you can't catch errors which occured in callbacks. Consider following:
     } catch(error) {
       // you'll never get in here
     };
+
+## Testing Exceptions
+
+    this.assertion("should throw an error", function (test) {
+      assert.throws(function () {
+        throw new Error("Error occured!");
+        test.finished();
+      });
+    });
+
+This obviously can't work, because exception interrupts the anonymous function we are passing as an argument for `assert.throws()`.
+
+    this.assertion("should throw an error", function (test) {
+      assert.throws(function () {
+        throw new Error("Error occured!");
+      });
+      test.finished();
+    });
+
+This is better, it will at least work, but what if there will be an error in the `assert.throws()` function and it doesn't call the anonymous function?
+
+    this.assertion("should throw an error", function (test) {
+      assert.throws(function () {
+        test.finished();
+        throw new Error("Error occured!");
+      });
+    });
+
+OK, this is better, `test.finished()` doesn't jump out of the test, so in case that the assertion will fail, we will get the proper result. However it's not perfect, because I can change `test.finished()` in future to actually jump out of the function (I probably won't do that but you can't know) plus if there would be a bug, so `test.finished()` would cause an exception, it would satisfy `assert.throws()` without actually testing the code. Well, you'd probably noticed in other tests, but still.
+
+Fortunatelly you can specify error class and expected message for `assert.throws()` in this order: `assert.throws(block, error, message)`.
