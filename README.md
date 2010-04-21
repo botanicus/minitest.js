@@ -2,6 +2,10 @@
 
 Simple test framework for asynchronous testing in [Node.js](http://nodejs.org/). It's trying to be as simple and explicit as possible. No magic, no wheel reinventing. Just use minitest for building your tests and the [assert library](http://nodejs.org/api.html#assert-212) for the actual helpers for testing equality etc.
 
+This is how the output looks like:
+
+![Minitest.js output](minitest.png)
+
 # Setup
 
 * `require()` minitest
