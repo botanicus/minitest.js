@@ -54,7 +54,10 @@ function Test (description, block, setupBlock) {
 
 Test.prototype.run = function () {
   try {
-    this.setupBlock.call(this);
+    if (this.setupBlock) {
+      this.setupBlock.call(this);
+    };
+
     this.block.call(this, this);
   } catch(error) {
     this.failed(error);
