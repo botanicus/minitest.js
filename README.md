@@ -23,9 +23,13 @@ This is how the output looks like:
     minitest.setupListeners();
   
     minitest.context("Context#setup()", function () {
+      this.setup(function () {
+        this.user = {name: "Jakub"};
+      });
+
       this.assertion("it should setup listeners", function (test) {
         // test something via the standard assert module
-        assert.ok(context.listeners)
+        assert.ok(this.user)
 
         // mark test as finished
         test.finished();

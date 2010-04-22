@@ -46,13 +46,15 @@ Context.prototype.report = function () {
 };
 
 /* test */
-function Test (description, block) {
+function Test (description, block, setupBlock) {
   this.description = description;
   this.block = block;
+  this.setupBlock = setupBlock;
 };
 
 Test.prototype.run = function () {
   try {
+    this.setupBlock.call(this);
     this.block.call(this, this);
   } catch(error) {
     this.failed(error);
@@ -115,9 +117,13 @@ function context (description, block) {
     });
 */
 Context.prototype.assertion = function (description, block) {
-  var test = new Test(description, block);
+  var test = new Test(description, block, this.setupBlock);
   this.register(test);
   test.run();
+};
+
+Context.prototype.setup = function (block) {
+  this.setupBlock = block;
 };
 
 function runAtExit () {
