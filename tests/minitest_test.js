@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var assert = require("assert");
-var minitest = require("./minitest");
+var minitest = require("../lib/minitest");
 
 // setup listeners
 minitest.setupListeners();
