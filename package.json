@@ -1,7 +1,7 @@
 { "name" : "minitest"
 , "description" : "A small assert based testbed for Node"
 , "version" : "0.1.0"
-, "author" : "Jakub Stastny <stastny@101ideas.cz>"
+, "author" : "Jakub Stastny"
 , "contributors" : []
 , "repository" :
   { "type" : "git"
