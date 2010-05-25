@@ -1,5 +1,5 @@
-minitest = require("./lib/minitest");
+var minitest = require("./lib/minitest");
 
-for (var k in minitest) {
-  exports[k] = minitest[k];
+for (var key in minitest) {
+  exports[key] = minitest[key];
 }
